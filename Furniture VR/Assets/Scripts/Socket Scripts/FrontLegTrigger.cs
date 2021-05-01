@@ -19,7 +19,7 @@ public class FrontLegTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isSnapped)
+        if (!isSnapped)   //if nothing is in snapZone, checks ID for snapping 
         {
 
             if (other.gameObject.tag.Equals("FrontLeg"))
@@ -34,7 +34,7 @@ public class FrontLegTrigger : MonoBehaviour
                 gos = objs;
                 foreach (GameObject go in objs)
                 {
-                    go.GetComponent<Renderer>().material.color = Color.green;
+                    go.GetComponent<Renderer>().material.color = Color.green;   //sets valid snap color
                 }
                 //originalColor = objs[0].gameObject.GetComponent<Renderer>().material.color;
 
@@ -49,7 +49,7 @@ public class FrontLegTrigger : MonoBehaviour
                     GameObject[] objs = other.gameObject.GetComponent<MatGrabber>().getObjsToChange();
                     foreach (GameObject go in objs)
                     {
-                        go.GetComponent<Renderer>().material.color = Color.red;
+                        go.GetComponent<Renderer>().material.color = Color.red;    //sets invalid snap color
                     }
                 }
             }
@@ -60,7 +60,7 @@ public class FrontLegTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!isSnapped)
+        if (!isSnapped)   //if not snapped, reset colots of objects to white
         {
            
             if (!other.gameObject.tag.Equals("Floor"))
@@ -75,7 +75,7 @@ public class FrontLegTrigger : MonoBehaviour
                 }
 
             }
-            if (other.gameObject.tag.Equals("FrontLeg"))
+            if (other.gameObject.tag.Equals("FrontLeg"))  //if was valid snap ID, delete reference to snapped item 
             {
                 this.GetComponent<XRSocketInteractor>().socketActive = false;
                 for (int i =  0; i < curObject.Length; i++)
@@ -91,6 +91,7 @@ public class FrontLegTrigger : MonoBehaviour
 
     }
 
+    //Called by Event System When Snap occurs
     public void SnapObject()
     {
         isSnapped = true;
@@ -115,12 +116,12 @@ public class FrontLegTrigger : MonoBehaviour
             snappedObject = curObject;
         }
 
-        this.GetComponentInChildren<BoxCollider>().enabled = true;
+        this.GetComponentInChildren<BoxCollider>().enabled = true; //sets fake trigger so chair can stand on legs
 
         AssemblyProgressCounter.S.IncrementSnap();
     }
 
-  
+    //Called by Event System When UnSnap occurs
     public void UnsnapObject()
     {
         isSnapped = false;
@@ -133,7 +134,7 @@ public class FrontLegTrigger : MonoBehaviour
                 snappedObject[i] = null;
             }
         }
-        this.GetComponentInChildren<BoxCollider>().enabled = false;
+        this.GetComponentInChildren<BoxCollider>().enabled = false; //disables fake collider when unsnapped
         AssemblyProgressCounter.S.DecrementSnap();
     }
 
