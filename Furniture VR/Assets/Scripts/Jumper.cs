@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
+//Allows for teleportation on button press
 public class Jumper : MonoBehaviour
 {
     public XRNode inputSource;

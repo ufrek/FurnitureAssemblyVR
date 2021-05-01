@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
+//Respawns ball if it is not in its original position in opening scene
 public class BallRespawner : MonoBehaviour
 {
     Vector3 startPos;

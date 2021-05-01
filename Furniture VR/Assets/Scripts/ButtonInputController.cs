@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
-
+//Template for Button Input Event System Management
 public class ButtonInputController : MonoBehaviour
 {
     public XRNode inputSource;
